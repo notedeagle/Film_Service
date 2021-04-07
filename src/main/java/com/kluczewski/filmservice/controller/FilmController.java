@@ -1,13 +1,17 @@
 package com.kluczewski.filmservice.controller;
 
 import com.kluczewski.filmservice.model.dto.FilmDto;
+import com.kluczewski.filmservice.model.dto.FilmDtoMapper;
 import com.kluczewski.filmservice.model.dto.FilmInsertDto;
 import com.kluczewski.filmservice.model.dto.FilmUpdateDto;
 import com.kluczewski.filmservice.model.entity.Film;
 import com.kluczewski.filmservice.service.FilmService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RestController
@@ -38,6 +42,13 @@ public class FilmController {
     @PutMapping("/{id}")
     public Film updateFilm(@PathVariable Long id, @RequestBody FilmUpdateDto filmUpdateDto) {
         Film filmUpdated = filmService.update(id, mapper.map(filmUpdateDto, Film.class));
-        return mapper.map(filmUpdated, Film.class);
+        return filmService.update(id, mapper.map(filmUpdated, Film.class));
+    }
+
+    @GetMapping
+    public List<FilmDto> getAllFilms(@RequestParam(required = false) Integer page, Sort.Direction sort) {
+        int pageNumber = page != null && page >= 0 ? page : 0;
+        Sort.Direction sortDirection = sort != null ? sort : Sort.Direction.ASC;
+        return FilmDtoMapper.mapToFilmDtos(filmService.getAllFilms(pageNumber, sortDirection));
     }
 }

@@ -7,10 +7,13 @@ import com.kluczewski.filmservice.model.entity.Film;
 import com.kluczewski.filmservice.repository.FilmRepository;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -22,6 +25,8 @@ public class FilmService {
     private final CategoryService categoryService;
     private final DirectorService directorService;
     private final ModelMapper mapper;
+
+    private static final int PAGE_SIZE = 20;
 
     @Transactional
     public Film save(Film film) {
@@ -63,8 +68,10 @@ public class FilmService {
         filmToUpdate.setReleaseYear(film.getReleaseYear());
         filmToUpdate.setDescription(film.getDescription());
         filmToUpdate.setUpdated(LocalDateTime.now());
-        filmToUpdate.setCategories(film.getCategories());
-        filmToUpdate.setDirectors(film.getDirectors());
         return filmToUpdate;
+    }
+
+    public List<Film> getAllFilms(int page, Sort.Direction sort) {
+        return filmRepository.findAllFilms(PageRequest.of(page, PAGE_SIZE, Sort.by(sort, "id")));
     }
 }

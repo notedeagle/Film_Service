@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -18,7 +17,5 @@ public class FilmUpdateDto {
     private Double rating;
     private String description;
     private Integer releaseYear;
-    private Set<CategoryInsertDto> categories;
-    private Set<DirectorInsertDto> directors;
     private LocalDateTime updated;
 }
