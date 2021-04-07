@@ -1,6 +1,6 @@
 package com.kluczewski.filmservice.service;
 
-import com.kluczewski.filmservice.model.ConfirmationToken;
+import com.kluczewski.filmservice.model.entity.ConfirmationToken;
 import com.kluczewski.filmservice.repository.ConfirmationTokenRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

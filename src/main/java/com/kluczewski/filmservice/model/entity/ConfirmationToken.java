@@ -1,4 +1,4 @@
-package com.kluczewski.filmservice.model;
+package com.kluczewski.filmservice.model.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

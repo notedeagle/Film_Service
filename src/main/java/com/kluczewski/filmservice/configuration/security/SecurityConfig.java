@@ -66,6 +66,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/h2-console/**").permitAll()
                 .antMatchers("/register/**").permitAll() //register
                 .antMatchers("/confirm/**").permitAll()
+                .antMatchers("**").permitAll() //do usunięcia!
                 .anyRequest().authenticated()
                 .and()
                 .cors()

@@ -1,7 +1,7 @@
 package com.kluczewski.filmservice.service;
 
-import com.kluczewski.filmservice.model.ConfirmationToken;
-import com.kluczewski.filmservice.model.User;
+import com.kluczewski.filmservice.model.entity.ConfirmationToken;
+import com.kluczewski.filmservice.model.entity.User;
 import com.kluczewski.filmservice.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;

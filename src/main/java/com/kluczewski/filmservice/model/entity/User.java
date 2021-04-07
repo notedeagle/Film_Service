@@ -1,5 +1,6 @@
-package com.kluczewski.filmservice.model;
+package com.kluczewski.filmservice.model.entity;
 
+import com.kluczewski.filmservice.model.UserRole;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
