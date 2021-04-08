@@ -46,9 +46,8 @@ public class FilmController {
     }
 
     @GetMapping
-    public List<FilmDto> getAllFilms(@RequestParam(required = false) Integer page, Sort.Direction sort) {
-        int pageNumber = page != null && page >= 0 ? page : 0;
+    public List<FilmDto> findAll(Sort.Direction sort) {
         Sort.Direction sortDirection = sort != null ? sort : Sort.Direction.ASC;
-        return FilmDtoMapper.mapToFilmDtos(filmService.getAllFilms(pageNumber, sortDirection));
+        return FilmDtoMapper.mapToFilmDtos(filmService.findAll(sortDirection));
     }
 }

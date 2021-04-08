@@ -1,13 +1,17 @@
 package com.kluczewski.filmservice.service;
 
 import com.kluczewski.filmservice.model.dto.DirectorDto;
+import com.kluczewski.filmservice.model.dto.FilmDto;
 import com.kluczewski.filmservice.model.entity.Director;
 import com.kluczewski.filmservice.repository.DirectorRepository;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.Set;
 
 
 @Service
@@ -30,5 +34,9 @@ public class DirectorService {
         } else {
             return directorRepository.save(director);
         }
+    }
+
+    public List<Director> findAll(Sort.Direction sort) {
+        return directorRepository.findAll(Sort.by(sort, "id"));
     }
 }

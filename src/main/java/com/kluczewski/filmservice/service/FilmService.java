@@ -71,7 +71,7 @@ public class FilmService {
         return filmToUpdate;
     }
 
-    public List<Film> getAllFilms(int page, Sort.Direction sort) {
-        return filmRepository.findAllFilms(PageRequest.of(page, PAGE_SIZE, Sort.by(sort, "id")));
+    public List<Film> findAll(Sort.Direction sort) {
+        return filmRepository.findAll(Sort.by(sort, "id"));
     }
 }

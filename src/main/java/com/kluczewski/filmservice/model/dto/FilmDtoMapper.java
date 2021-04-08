@@ -1,8 +1,6 @@
 package com.kluczewski.filmservice.model.dto;
 
-import com.google.common.io.Files;
 import com.kluczewski.filmservice.model.entity.Film;
-import org.modelmapper.ModelMapper;
 
 import java.util.List;
 import java.util.stream.Collectors;
