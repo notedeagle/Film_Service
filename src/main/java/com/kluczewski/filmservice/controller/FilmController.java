@@ -1,9 +1,6 @@
 package com.kluczewski.filmservice.controller;
 
-import com.kluczewski.filmservice.model.dto.FilmDto;
-import com.kluczewski.filmservice.model.dto.FilmDtoMapper;
-import com.kluczewski.filmservice.model.dto.FilmInsertDto;
-import com.kluczewski.filmservice.model.dto.FilmUpdateDto;
+import com.kluczewski.filmservice.model.dto.*;
 import com.kluczewski.filmservice.model.entity.Film;
 import com.kluczewski.filmservice.service.FilmService;
 import lombok.RequiredArgsConstructor;
@@ -30,7 +27,7 @@ public class FilmController {
     }
 
     @GetMapping("{id}")
-    public FilmDto getFilm(@PathVariable Long id) {
+    public FilmWithDirectorDto getFilm(@PathVariable Long id) {
         return filmService.findById(id);
     }
 
@@ -40,14 +37,14 @@ public class FilmController {
     }
 
     @PutMapping("/{id}")
-    public Film updateFilm(@PathVariable Long id, @RequestBody FilmUpdateDto filmUpdateDto) {
-        Film filmUpdated = filmService.update(id, mapper.map(filmUpdateDto, Film.class));
+    public FilmUpdateDto updateFilm(@PathVariable Long id, @RequestBody FilmUpdateDto filmUpdateDto) {
+        FilmUpdateDto filmUpdated = filmService.update(id, mapper.map(filmUpdateDto, Film.class));
         return filmService.update(id, mapper.map(filmUpdated, Film.class));
     }
 
     @GetMapping
-    public List<FilmDto> findAll(Sort.Direction sort) {
+    public List<FilmWithDirectorDto> findAll(Sort.Direction sort) {
         Sort.Direction sortDirection = sort != null ? sort : Sort.Direction.ASC;
-        return FilmDtoMapper.mapToFilmDtos(filmService.findAll(sortDirection));
+        return FilmDtoMapper.mapToFilmWithDirectorDtos(filmService.findAll(sortDirection));
     }
 }

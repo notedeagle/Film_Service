@@ -22,11 +22,26 @@ public class DirectorDtoMapper {
                 .collect(Collectors.toList());
     }
 
+    public static List<DirectorWithFilmsDto> mapToDirectorWithFilmsDtos(List<Director> directors) {
+        return directors.stream()
+                .map(DirectorDtoMapper::mapToDirectorWithFilmsDto)
+                .collect(Collectors.toList());
+    }
+
     private static DirectorDto mapToDirectorDto(Director director) {
         return DirectorDto.builder()
                 .id(director.getId())
                 .firstname(director.getFirstname())
                 .lastname(director.getLastname())
+                .build();
+    }
+
+    private static DirectorWithFilmsDto mapToDirectorWithFilmsDto(Director director) {
+        return DirectorWithFilmsDto.builder()
+                .id(director.getId())
+                .firstname(director.getFirstname())
+                .lastname(director.getLastname())
+                .films(FilmDtoMapper.mapToFilmDto(director.getFilms()))
                 .build();
     }
 }

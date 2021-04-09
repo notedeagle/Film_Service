@@ -1,6 +1,8 @@
 package com.kluczewski.filmservice.service;
 
 import com.kluczewski.filmservice.model.dto.FilmDto;
+import com.kluczewski.filmservice.model.dto.FilmUpdateDto;
+import com.kluczewski.filmservice.model.dto.FilmWithDirectorDto;
 import com.kluczewski.filmservice.model.entity.Category;
 import com.kluczewski.filmservice.model.entity.Director;
 import com.kluczewski.filmservice.model.entity.Film;
@@ -26,8 +28,6 @@ public class FilmService {
     private final DirectorService directorService;
     private final ModelMapper mapper;
 
-    private static final int PAGE_SIZE = 20;
-
     @Transactional
     public Film save(Film film) {
         Set<Category> categories = film.getCategories().stream()
@@ -43,9 +43,9 @@ public class FilmService {
     }
 
     @Transactional
-    public FilmDto findById(Long id) {
+    public FilmWithDirectorDto findById(Long id) {
         Film film = mapper.map(filmRepository.findById(id).orElseThrow(), Film.class);
-        return mapper.map(film, FilmDto.class);
+        return mapper.map(film, FilmWithDirectorDto.class);
     }
 
     @Transactional
@@ -61,14 +61,14 @@ public class FilmService {
     }
 
     @Transactional
-    public Film update(Long id, Film film) {
+    public FilmUpdateDto update(Long id, Film film) {
         Film filmToUpdate = findFilmById(id);
         filmToUpdate.setTitle(film.getTitle());
         filmToUpdate.setRating(film.getRating());
         filmToUpdate.setReleaseYear(film.getReleaseYear());
         filmToUpdate.setDescription(film.getDescription());
-        filmToUpdate.setUpdated(LocalDateTime.now());
-        return filmToUpdate;
+        filmToUpdate.setUpdated(film.getUpdated());
+        return mapper.map(filmToUpdate, FilmUpdateDto.class);
     }
 
     public List<Film> findAll(Sort.Direction sort) {
